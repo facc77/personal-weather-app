@@ -16,17 +16,14 @@ h3 {
 
 .weather-app {
   min-height: 100vh;
-  /* background-image: url(./assets/images/cloudy.jpg); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
   position: relative;
   transition: 500ms;
-  opacity: 1; /* change to 0 once the whole app is finished */
+  opacity: 1;
 }
-
-/* add background overlay */
 
 .weather-app::before {
   content: '';
@@ -156,6 +153,9 @@ h3 {
 .city {
   display: block;
   cursor: pointer;
+  display: inline-block;
+  width: 50%;
+  color: #ccc;
 }
 
 .city:hover {

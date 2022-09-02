@@ -38,11 +38,11 @@ const SidebarSearch = () => {
           <i className='fa-solid fa-magnifying-glass'></i>
         </button>
       </form>
-      <Row xs={1} md={2} className='cities'>
+      <div className='cities'>
         {lugares?.map((lugar: { name: string; id: number }) => {
           return <ItemList key={lugar.id} {...lugar} />;
         })}
-      </Row>
+      </div>
     </div>
   );
 };

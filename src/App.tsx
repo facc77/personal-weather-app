@@ -6,7 +6,6 @@ import SidebarSearch from './components/SidebarSearch';
 import backgroundType from './helpers/backgroundType';
 import useFetch from './hooks/useFetch';
 import { QueryContext } from './providers/queryProviders';
-import second from './assets/videos/day/clear.mp4';
 
 const url = process.env.REACT_APP_WEATHER_URL as string;
 const key = process.env.REACT_APP_API_KEY as string;
@@ -32,13 +31,7 @@ const App: React.FC = () => {
           type='video/mp4'
         />
       </video>
-      <div
-        className='weather-app'
-
-        /* style={{
-          backgroundImage: `url( ${require(`./assets/images/${isDay}/${weather}.jpg`)} )`,
-        }}  */
-      >
+      <div className='weather-app'>
         <BackgroundData data={data} />
         <div className='panel'>
           <SidebarSearch />

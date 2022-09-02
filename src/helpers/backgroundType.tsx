@@ -1,5 +1,3 @@
-import React from 'react';
-
 type FunctionProps = {
   code: number;
   is_day: number;
@@ -17,7 +15,6 @@ const backgroundType = ({ code, is_day }: FunctionProps) => {
   if (code === 1000) {
     weatherType.weather = 'clear';
   } else if (
-    // Same thing for cloudy weather
     code === 1003 ||
     code === 1006 ||
     code === 1009 ||
@@ -32,7 +29,6 @@ const backgroundType = ({ code, is_day }: FunctionProps) => {
   ) {
     weatherType.weather = 'cloudy';
   } else if (
-    // Same thing for rainy weather
     code === 1063 ||
     code === 1069 ||
     code === 1072 ||

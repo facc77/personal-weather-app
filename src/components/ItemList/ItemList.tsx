@@ -16,9 +16,9 @@ const ItemList = ({ name, id }: ItemProps) => {
     });
   };
   return (
-    <Col key={id} className='city' onClick={handleClick}>
+    <p key={id} className='city' onClick={handleClick}>
       {name}
-    </Col>
+    </p>
   );
 };
 
