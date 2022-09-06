@@ -1,0 +1,41 @@
+.city-time,
+.temp,
+.weather {
+  margin: 0 1 em;
+}
+
+.city-time h1 {
+  margin: 0;
+  margin-bottom: 0.2em;
+  font-size: 3em;
+}
+
+.temp {
+  font-size: 7em;
+  margin: 0;
+}
+
+.weather img {
+  display: block;
+  margin: 0.5em 0;
+}
+
+@media screen and (max-width: 500px) {
+  .temp {
+    font-size: 4em !important;
+    margin: 0;
+  }
+  .container {
+    align-items: center;
+    padding: 0;
+  }
+
+  .container > div {
+    padding: 1rem;
+  }
+}
+
+.condition {
+  max-width: 6rem;
+  text-align: center;
+}

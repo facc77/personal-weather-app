@@ -1,27 +1,51 @@
 import React, { useContext } from 'react';
-import { QueryContext } from '../../providers/queryProviders';
+import { StyleContext } from '../../providers/styleProviders';
+import ClockTime from '../ClockTime/ClockTime';
+import './style.css';
 
-const BackgroundData = ({ ...props }) => {
-  const { temp_c, condition } = props.data.current;
-  const { query } = useContext(QueryContext);
-  const now = new Date();
-  const current = now.getHours() + ':' + now.getMinutes();
+type BackgroundProps = {
+  temp_c: number;
+  condition: {
+    icon: string;
+    text: string;
+    code: number;
+  };
+  localtime: string;
+  name: string;
+};
+
+const BackgroundData = ({
+  temp_c,
+  condition,
+  localtime,
+  name,
+}: BackgroundProps) => {
+  const { style } = useContext(StyleContext);
 
   return (
-    <div className='container'>
-      <h3 className='brand'>The weather</h3>
+    <div className='container' style={{ opacity: style.opacity }}>
+      <div className='d-flex'>
+        <ClockTime localtime={localtime} />
+      </div>
       <div>
-        <h1 className='temp'>{temp_c}&#176;</h1>
+        <h1
+          className='temp'
+          style={{ fontSize: name.length > 19 ? '5em' : '7em' }}
+        >
+          {temp_c}&#176;
+        </h1>
         <div className='city-time'>
-          <h1 className='name'>{query.query}</h1>
-          <small>
-            <span className='time'>{current}</span>-
-            <span className='date'>{`${now.toLocaleDateString()}`}</span>
-          </small>
+          {name.length > 19 ? (
+            <h2 className='name text-center'>
+              {name.length > 25 ? name.substring(0, 28) + '...' : name}
+            </h2>
+          ) : (
+            <h1 className='name text-center'>{name}</h1>
+          )}
         </div>
-        <div className='weather'>
+        <div className='weather d-flex flex-column align-items-center'>
           <img
-            src={props.data.current?.condition?.icon}
+            src={condition.icon}
             className='icon'
             alt='icon'
             width='50'

@@ -1,0 +1,28 @@
+.react-clock__face {
+  border: 0 !important;
+}
+.react-clock__mark__body,
+.react-clock__hand__body {
+  background-color: white;
+}
+
+.react-clock__second-hand__body {
+  background-color: red;
+}
+
+.timeString {
+  position: absolute;
+  top: 3rem;
+  right: 6.5rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 500px) {
+  .timeString {
+    top: 2rem;
+    right: 5rem;
+  }
+  .timeHolder {
+    position: relative;
+  }
+}

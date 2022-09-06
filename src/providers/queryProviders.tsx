@@ -19,7 +19,7 @@ export const QueryContextProvider = ({
   children,
 }: QueryContextProviderProps) => {
   const [query, setQuery] = useState<Query>({
-    query: 'london',
+    query: 'London',
   });
   return (
     <QueryContext.Provider value={{ query, setQuery }}>

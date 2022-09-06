@@ -1,0 +1,21 @@
+.panel ul {
+  padding: 0 0 1em 0;
+  margin: 0;
+}
+
+.panel ul li {
+  color: #fff;
+  margin: 2.3em 0;
+}
+
+.panel ul h4 {
+  margin: 0.5rem 0;
+  padding: 0.7rem 0;
+  border-bottom: 1px #ccc solid;
+}
+
+.details li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

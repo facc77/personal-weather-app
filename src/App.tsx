@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import './App.css';
 import { BackgroundData } from './components/BackgroundData';
+import { BackgroundVideo } from './components/BackgroundVideo';
 import { DetailSection } from './components/DetailSection';
-import SidebarSearch from './components/SidebarSearch';
-import backgroundType from './helpers/backgroundType';
+import { SidebarSearch } from './components/SidebarSearch';
 import useFetch from './hooks/useFetch';
 import { QueryContext } from './providers/queryProviders';
 
@@ -12,30 +12,46 @@ const key = process.env.REACT_APP_API_KEY as string;
 
 const App: React.FC = () => {
   const { query } = useContext(QueryContext);
-  const { data } = useFetch(url, key, query.query /* , true */);
+  const { data } = useFetch(url, key, query.query);
 
   if (!data) {
-    return <p>"loading"</p>;
+    return (
+      <div className='spinner-border text-primary' role='status'>
+        <span className='sr-only'>Loading...</span>
+      </div>
+    );
   }
 
-  const { condition, is_day } = data.current;
-  const { isDay, weather } = backgroundType({ code: condition.code, is_day });
+  const handleClick = () => {
+    const videoElement = document.getElementById(
+      'myVideo',
+    ) as HTMLVideoElement | null;
 
-  const videoUrl = `./assets/videos/${isDay}/${weather}.mp4`;
+    if (videoElement !== null) {
+      videoElement.play();
+    }
+  };
+
+  const { condition, is_day, humidity, wind_kph, cloud, temp_c } = data.current;
+  const { localtime, name } = data.location;
 
   return (
     <>
-      <video key={videoUrl} autoPlay muted loop id='myVideo'>
-        <source
-          src={`${require(`./assets/videos/${isDay}/${weather}.mp4`)}`}
-          type='video/mp4'
+      <BackgroundVideo condition={condition.code} is_day={is_day} />
+      <div className='weather-app' onClick={handleClick}>
+        <BackgroundData
+          localtime={localtime}
+          name={name}
+          condition={condition}
+          temp_c={temp_c}
         />
-      </video>
-      <div className='weather-app'>
-        <BackgroundData data={data} />
         <div className='panel'>
           <SidebarSearch />
-          <DetailSection data={data} />
+          <DetailSection
+            humidity={humidity}
+            wind_kph={wind_kph}
+            cloud={cloud}
+          />
         </div>
       </div>
     </>

@@ -1,21 +1,24 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import useFetch from '../hooks/useFetch';
-import { ItemList } from './ItemList';
-import Row from 'react-bootstrap/Row';
+import useFetch from '../../hooks/useFetch';
+import { ItemList } from '../ItemList';
+import './style.css';
 
 const url = process.env.REACT_APP_SEARCH_URL as string;
 const key = process.env.REACT_APP_API_KEY as string;
 
 const SidebarSearch = () => {
-  const [location, setLocation] = useState('london');
-  const { data, loading } = useFetch(url, key, location);
+  const [location, setLocation] = useState('');
+  const [showPlaces, setShowPlaces] = useState(false);
+  const { data } = useFetch(url, key, location);
   const [lugares, setLugares] = useState(data);
   const [submit, setSubmit] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmit(true);
+    setLocation('');
+    setShowPlaces(true);
   };
 
   if (submit) {
@@ -32,6 +35,8 @@ const SidebarSearch = () => {
           type='text'
           className='search'
           placeholder='Search location...'
+          autoComplete='off'
+          value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
         <button type='submit' className='submit'>
@@ -39,9 +44,16 @@ const SidebarSearch = () => {
         </button>
       </form>
       <div className='cities'>
-        {lugares?.map((lugar: { name: string; id: number }) => {
-          return <ItemList key={lugar.id} {...lugar} />;
-        })}
+        {showPlaces &&
+          lugares?.map((place: { name: string; id: number }) => {
+            return (
+              <ItemList
+                key={place.id}
+                place={place}
+                setShowPlaces={setShowPlaces}
+              />
+            );
+          })}
       </div>
     </div>
   );
