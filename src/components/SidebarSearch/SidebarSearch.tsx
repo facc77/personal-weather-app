@@ -7,7 +7,7 @@ import './style.css';
 const url = process.env.REACT_APP_SEARCH_URL as string;
 const key = process.env.REACT_APP_API_KEY as string;
 
-const SidebarSearch = () => {
+const SidebarSearch: React.FC = () => {
   const [location, setLocation] = useState('');
   const [showPlaces, setShowPlaces] = useState(false);
   const { data } = useFetch(url, key, location);
@@ -25,6 +25,8 @@ const SidebarSearch = () => {
     setLugares(data);
     setSubmit(false);
   }
+
+  console.log(lugares);
 
   return (
     <div>
@@ -45,15 +47,19 @@ const SidebarSearch = () => {
       </form>
       <div className='cities'>
         {showPlaces &&
-          lugares?.map((place: { name: string; id: number }) => {
-            return (
-              <ItemList
-                key={place.id}
-                place={place}
-                setShowPlaces={setShowPlaces}
-              />
-            );
-          })}
+          (lugares?.length > 0 ? (
+            lugares?.map((place: { name: string; id: number }) => {
+              return (
+                <ItemList
+                  key={place.id}
+                  place={place}
+                  setShowPlaces={setShowPlaces}
+                />
+              );
+            })
+          ) : (
+            <p>location not found</p>
+          ))}
       </div>
     </div>
   );

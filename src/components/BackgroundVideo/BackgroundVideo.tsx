@@ -8,7 +8,7 @@ type VideoProps = {
   condition: number;
 };
 
-const BackgroundVideo = ({ condition, is_day }: VideoProps) => {
+const BackgroundVideo: React.FC<VideoProps> = ({ condition, is_day }) => {
   const { style } = useContext(StyleContext);
 
   const { isDay, weather } = backgroundType({ code: condition, is_day });

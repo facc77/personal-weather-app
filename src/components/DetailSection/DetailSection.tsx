@@ -8,7 +8,11 @@ type DetailProps = {
   cloud: number;
 };
 
-const DetailSection = ({ humidity, wind_kph, cloud }: DetailProps) => {
+const DetailSection: React.FC<DetailProps> = ({
+  humidity,
+  wind_kph,
+  cloud,
+}) => {
   const { style } = useContext(StyleContext);
 
   return (

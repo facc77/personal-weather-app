@@ -9,7 +9,7 @@ type ItemProps = {
   setShowPlaces: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ItemList = ({ setShowPlaces, place }: ItemProps) => {
+const ItemList: React.FC<ItemProps> = ({ setShowPlaces, place }) => {
   const { setQuery } = useContext(QueryContext);
   const { setStyle } = useContext(StyleContext);
 

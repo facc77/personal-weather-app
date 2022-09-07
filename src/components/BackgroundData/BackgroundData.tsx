@@ -14,12 +14,12 @@ type BackgroundProps = {
   name: string;
 };
 
-const BackgroundData = ({
+const BackgroundData: React.FC<BackgroundProps> = ({
   temp_c,
   condition,
   localtime,
   name,
-}: BackgroundProps) => {
+}) => {
   const { style } = useContext(StyleContext);
 
   return (
